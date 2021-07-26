@@ -88,7 +88,7 @@ class Db
         $this->query .=" WHERE `$field` $operation '$value'";
         return $this;
     }
-    
+
     public function whereIn(string $field, array $values)
     {
         $values = "(" . implode(",", $values) . ")";
@@ -113,4 +113,30 @@ class Db
         $this->query .= " LIMIT $num"; 
         return $this;
     }
+
+
+    public function innerJoin($table_fields_Array, $fromTable, $onArray)
+    {
+        $columns = '';
+        $on ='';
+
+        foreach($table_fields_Array as $table => $fields) {
+            foreach($fields as $field) {
+               $alias = trim($table, "s") . "_" . $field;
+               $columns .= "$table.$field AS $alias, ";
+            }
+        }
+
+        foreach($onArray as $table => $conds) {
+            foreach($conds as $left => $right) {
+                $on .= " JOIN $table ON $left = $right";
+            }
+        }
+
+        $columns = substr($columns,0,-2);
+        $this->query = "SELECT $columns FROM $fromTable $on";
+        
+        return $this;
+    }
+
 }
