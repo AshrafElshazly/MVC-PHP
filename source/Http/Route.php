@@ -6,26 +6,26 @@ class Route
 {
     private static $routing_table = [];
 
-    public static function get(string $url, string $controller_actions, string $middleware = null )
+    public static function get(string $url, string $controller, string $middleware = null )
     {   
-        $controller_actions = explode("@",$controller_actions);
+        $controller = explode("@",$controller);
         $url_regex = "/^" . str_replace("/" ,"\/" ,$url) ."$/";
         self::$routing_table[$url_regex] = [
             "method"     => "GET",
-            "controller" => $controller_actions[0],
-            "action"     => $controller_actions[1],
+            "controller" => $controller[0],
+            "action"     => $controller[1],
             "middleware" => $middleware
         ];
     }
 
-    public static function post(string $url , string $controller_actions, string $middleware = null )
+    public static function post(string $url , string $controller, string $middleware = null )
     {   
-        $controller_actions = explode("@",$controller_actions);
+        $controller = explode("@",$controller);
         $url_regex = "/^" . str_replace("/" ,"\/" ,$url) ."$/";
         self::$routing_table[$url_regex] = [
-            "method"     => "post",
-            "controller" => $controller_actions[0],
-            "action"     => $controller_actions[1],
+            "method"     => "POST",
+            "controller" => $controller[0],
+            "action"     => $controller[1],
             "middleware" => $middleware
         ];
     }
