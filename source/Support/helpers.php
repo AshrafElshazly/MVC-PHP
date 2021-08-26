@@ -1,23 +1,16 @@
 <?php
 
-if(!function_exists('w_assets')) {
-    function w_assets($path)
+if(!function_exists('asset')) {
+    function assets($path)
     {
-        echo URL .'assets/web/'. $path ;
+        echo URL .'asset/'. $path ;
     }
 }
 
-if(!function_exists('a_assets')) {
-    function a_assets($path)
-    {
-        echo URL .'assets/admin/'. $path ;
-    }
-}
-
-if(!function_exists('uploads')) {
+if(!function_exists('upload')) {
     function uploads($path)
     {
-        echo URL .'uploads/'. $path ;
+        echo URL .'upload/'. $path ;
     }
 }
 

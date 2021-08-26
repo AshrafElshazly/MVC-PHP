@@ -45,7 +45,7 @@ class App
 
     public function render()
     {
-        
+        //Middleware
         if($this->middleware) {
 
             $middleware_name = "App\Http\Middlewares\\".$this->middleware;
@@ -54,18 +54,19 @@ class App
                 $middleware_name::handle(new Http\Request);
             }
         }
-        
-        $add_controller_namespace = "App\Http\Controllers\\".$this->controller;
 
-        if(class_exists($add_controller_namespace)) {
-            $controller_obj = new $add_controller_namespace;
+        //Controllers
+        $Controller_namespace = $this->controller;
+
+        if(class_exists($Controller_namespace)) {
+            $controller_obj = new $Controller_namespace;
             if(method_exists($controller_obj,$this->action)) {
                 call_user_func_array([$controller_obj, $this->action],$this->params);
             }else {
                 die("$this->action not found");
             }
         }else {
-            die("$this->controller not found");   
+            die("$this->controller not found");
         }
     }
 }

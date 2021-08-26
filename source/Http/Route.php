@@ -6,9 +6,8 @@ class Route
 {
     private static $routing_table = [];
 
-    public static function get(string $url, string $controller, string $middleware = null )
+    public static function get(string $url, array $controller, string $middleware = null )
     {   
-        $controller = explode("@",$controller);
         $url_regex = "/^" . str_replace("/" ,"\/" ,$url) ."$/";
         self::$routing_table[$url_regex] = [
             "method"     => "GET",
@@ -18,9 +17,8 @@ class Route
         ];
     }
 
-    public static function post(string $url , string $controller, string $middleware = null )
+    public static function post(string $url , array $controller, string $middleware = null )
     {   
-        $controller = explode("@",$controller);
         $url_regex = "/^" . str_replace("/" ,"\/" ,$url) ."$/";
         self::$routing_table[$url_regex] = [
             "method"     => "POST",

@@ -1,1 +1,1 @@
-# PHP-MVC v1.1
+# PHP-MVC v1.2
